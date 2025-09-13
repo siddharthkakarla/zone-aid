@@ -2,7 +2,19 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HeartPulse, LayoutDashboard, Truck, Map, Settings, Users, CreditCard, LogOut, User } from 'lucide-react';
+import { 
+  HeartPulse, 
+  LayoutDashboard, 
+  Siren, 
+  Stethoscope, 
+  FileText,
+  Heart,
+  MessageSquare,
+  Shield,
+  Settings, 
+  LogOut, 
+  User 
+} from 'lucide-react';
 import {
   SidebarProvider,
   Sidebar,
@@ -25,6 +37,8 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
+import { Badge } from '@/components/ui/badge';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from '@/components/ui/tooltip';
 
 export default function DashboardLayout({
   children,
@@ -34,29 +48,37 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const navItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { href: '/dashboard/patients', label: 'Patient Tracking', icon: Users },
-    { href: '/dashboard/optimize', label: 'Blood Delivery', icon: Truck },
-    { href: '/dashboard/map', label: 'Ambulance Tracking', icon: Map },
-    { href: '/dashboard/payments', label: 'Payments & Receipts', icon: CreditCard },
+    { href: '/dashboard/vitals', label: 'Health Vitals', icon: Heart },
+    { href: '/dashboard/symptom-checker', label: 'Symptom Checker', icon: Stethoscope },
+    { href: '/dashboard/appointments', label: 'Appointments', icon: FileText, badge: '3' },
+    { href: '/dashboard/messages', label: 'Messages', icon: MessageSquare, badge: '1' },
+    { href: '/dashboard/prescriptions', label: 'Prescriptions', icon: FileText },
+    { href: '/dashboard/privacy', label: 'Privacy & Security', icon: Shield },
   ];
 
   return (
     <SidebarProvider>
-      <Sidebar collapsible="icon">
+      <Sidebar collapsible="icon" className="bg-card border-r">
         <SidebarHeader>
           <div className="flex items-center gap-2">
-            <HeartPulse className="h-8 w-8 text-sidebar-foreground" />
-            <span className="font-headline text-xl font-semibold text-sidebar-foreground">ZoneAid</span>
+            <HeartPulse className="h-8 w-8 text-primary" />
+            <span className="font-headline text-xl font-semibold text-foreground">HealthPlus</span>
           </div>
         </SidebarHeader>
         <SidebarContent>
           <SidebarMenu>
             {navItems.map((item) => (
               <SidebarMenuItem key={item.label}>
-                <SidebarMenuButton asChild isActive={pathname.startsWith(item.href) && (item.href !== '/dashboard' || pathname === '/dashboard')} tooltip={item.label}>
+                <SidebarMenuButton 
+                  asChild 
+                  isActive={pathname === item.href} 
+                  tooltip={item.label}
+                  className="justify-start"
+                >
                   <Link href={item.href}>
                     <item.icon />
                     <span>{item.label}</span>
+                     {item.badge && <Badge className="ml-auto">{item.badge}</Badge>}
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
@@ -90,41 +112,56 @@ export default function DashboardLayout({
           </SidebarMenuItem>
         </SidebarFooter>
       </Sidebar>
-      <SidebarInset>
-        <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
+      <SidebarInset className="bg-muted/50">
+        <header className="sticky top-0 z-30 flex h-16 items-center gap-4 border-b bg-background px-4 sm:px-6">
           <SidebarTrigger />
-          <div className="relative ml-auto flex-1 md:grow-0" />
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button
-                variant="outline"
-                size="icon"
-                className="overflow-hidden rounded-full"
-              >
-                <Avatar>
-                  <AvatarImage src="https://picsum.photos/seed/user-avatar/100/100" alt="User" />
-                  <AvatarFallback>U</AvatarFallback>
-                </Avatar>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent align="end">
-              <DropdownMenuLabel>My Account</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                 <Link href="/dashboard/profile">Profile</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem asChild>
-                <Link href="/dashboard/settings">Settings</Link>
-              </DropdownMenuItem>
-              <DropdownMenuItem>Support</DropdownMenuItem>
-              <DropdownMenuSeparator />
-              <DropdownMenuItem asChild>
-                <Link href="/login">Logout</Link>
-              </DropdownMenuItem>
-            </DropdownMenuContent>
-          </DropdownMenu>
+          <div className="relative ml-auto flex items-center gap-4">
+             <TooltipProvider>
+              <Tooltip>
+                <TooltipTrigger asChild>
+                  <Button variant="destructive" className="flex items-center gap-2">
+                    <Siren className="h-5 w-5"/>
+                    <span className="hidden md:inline">Emergency SOS</span>
+                  </Button>
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>Immediately alert emergency contacts and services.</p>
+                </TooltipContent>
+              </Tooltip>
+            </TooltipProvider>
+
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="icon"
+                  className="overflow-hidden rounded-full"
+                >
+                  <Avatar>
+                    <AvatarImage src="https://picsum.photos/seed/user-avatar/100/100" alt="User" />
+                    <AvatarFallback>U</AvatarFallback>
+                  </Avatar>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent align="end">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                   <Link href="/dashboard/profile">Profile</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem asChild>
+                  <Link href="/dashboard/settings">Settings</Link>
+                </DropdownMenuItem>
+                <DropdownMenuItem>Support</DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/login">Logout</Link>
+                </DropdownMenuItem>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </div>
         </header>
-        <main className="flex-1 p-4 sm:px-6 sm:py-0">{children}</main>
+        <main className="flex-1 p-4 sm:px-6 sm:py-6">{children}</main>
       </SidebarInset>
     </SidebarProvider>
   );
