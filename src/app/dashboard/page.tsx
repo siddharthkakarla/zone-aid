@@ -146,7 +146,7 @@ export default function Dashboard() {
                                     {patientData.map((entry, index) => (
                                         <Cell key={`cell-${index}`} fill={patientChartConfig[entry.status as keyof typeof patientChartConfig]?.color} />
                                     ))}
-                                </Bar>
+                                 </Bar>
                             </BarChart>
                         </ResponsiveContainer>
                     </ChartContainer>
@@ -156,7 +156,7 @@ export default function Dashboard() {
                 <CardHeader>
                     <CardTitle>Ambulance Fleet</CardTitle>
                     <CardDescription>Live status of all ambulances.</CardDescription>
-                </Header>
+                </CardHeader>
                 <CardContent>
                      <ChartContainer config={ambulanceChartConfig} className="h-[250px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
