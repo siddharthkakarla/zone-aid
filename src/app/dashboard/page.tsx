@@ -1,3 +1,4 @@
+'use client';
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Truck, Map, Activity, Ambulance, Users } from "lucide-react";
@@ -78,7 +79,7 @@ export default function Dashboard() {
       label: "Servicing",
       color: "hsl(var(--chart-5))",
     },
-  }
+  };
 
   return (
     <div className="grid gap-4 md:gap-8">
@@ -161,7 +162,7 @@ export default function Dashboard() {
                 <CardHeader>
                     <CardTitle>Ambulance Fleet</CardTitle>
                     <CardDescription>Live status of all ambulances.</CardDescription>
-                </CardHeader>
+                </Header>
                 <CardContent>
                      <ChartContainer config={ambulanceChartConfig} className="h-[250px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
