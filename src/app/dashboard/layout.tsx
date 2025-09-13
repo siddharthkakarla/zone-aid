@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HeartPulse, LayoutDashboard, Truck, Map, Settings, Users, CreditCard } from 'lucide-react';
+import { HeartPulse, LayoutDashboard, Truck, Map, Settings, Users, CreditCard, LogOut } from 'lucide-react';
 import {
   SidebarProvider,
   Sidebar,
@@ -64,12 +64,22 @@ export default function DashboardLayout({
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
-          <SidebarMenuButton asChild tooltip="Settings" isActive={pathname === '/dashboard/settings'}>
-            <Link href="/dashboard/settings">
-              <Settings />
-              <span>Settings</span>
-            </Link>
-          </SidebarMenuButton>
+          <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip="Settings" isActive={pathname === '/dashboard/settings'}>
+              <Link href="/dashboard/settings">
+                <Settings />
+                <span>Settings</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+          <SidebarMenuItem>
+             <SidebarMenuButton asChild tooltip="Logout">
+                <Link href="/login">
+                  <LogOut />
+                  <span>Logout</span>
+                </Link>
+              </SidebarMenuButton>
+          </SidebarMenuItem>
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
