@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HeartPulse, LayoutDashboard, Truck, Map, Settings } from 'lucide-react';
+import { HeartPulse, LayoutDashboard, Truck, Map, Settings, Users } from 'lucide-react';
 import {
   SidebarProvider,
   Sidebar,
@@ -34,8 +34,9 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const navItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { href: '/dashboard/optimize', label: 'Supply Optimizer', icon: Truck },
-    { href: '/dashboard/map', label: 'Coverage Map', icon: Map },
+    { href: '/dashboard/patients', label: 'Patient Tracking', icon: Users },
+    { href: '/dashboard/optimize', label: 'Blood Delivery', icon: Truck },
+    { href: '/dashboard/map', label: 'Ambulance Tracking', icon: Map },
   ];
 
   return (
@@ -52,7 +53,7 @@ export default function DashboardLayout({
             {navItems.map((item) => (
               <SidebarMenuItem key={item.label}>
                 <Link href={item.href} legacyBehavior passHref>
-                  <SidebarMenuButton asChild isActive={pathname === item.href} tooltip={item.label}>
+                  <SidebarMenuButton asChild isActive={pathname.startsWith(item.href) && (item.href !== '/dashboard' || pathname === '/dashboard')} tooltip={item.label}>
                     <a>
                       <item.icon />
                       <span>{item.label}</span>
@@ -65,7 +66,7 @@ export default function DashboardLayout({
         </SidebarContent>
         <SidebarFooter>
           <Link href="/dashboard/settings" legacyBehavior passHref>
-            <SidebarMenuButton asChild tooltip="Settings">
+            <SidebarMenuButton asChild tooltip="Settings" isActive={pathname === '/dashboard/settings'}>
               <a>
                 <Settings />
                 <span>Settings</span>

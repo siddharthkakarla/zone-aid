@@ -15,7 +15,7 @@ export default function MapPage() {
     return (
         <Card>
             <CardHeader>
-                <CardTitle className="font-headline text-2xl">Live Ambulance Tracking</CardTitle>
+                <CardTitle className="font-headline text-2xl">Ambulance Live Tracking</CardTitle>
                 <CardDescription>
                     Real-time view of ambulance locations and hospital service areas.
                 </CardDescription>

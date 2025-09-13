@@ -6,9 +6,9 @@ export default function OptimizePage() {
     <div className="container mx-auto py-10">
       <Card>
         <CardHeader>
-          <CardTitle className="font-headline text-2xl">Supply Path Optimizer</CardTitle>
+          <CardTitle className="font-headline text-2xl">Blood Delivery Optimizer</CardTitle>
           <CardDescription>
-            Use our AI-powered tool to find the fastest and most efficient path for transporting critical supplies between facilities.
+            Use our AI-powered tool to find the fastest and most efficient path for transporting critical blood supplies between facilities.
           </CardDescription>
         </CardHeader>
         <SupplyPathOptimizer />
