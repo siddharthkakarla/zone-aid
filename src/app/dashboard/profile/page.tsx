@@ -1,11 +1,31 @@
 
+'use client';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { useToast } from "@/hooks/use-toast";
 
 export default function ProfilePage() {
+    const { toast } = useToast();
+
+    const handleUpdateProfile = () => {
+        toast({
+            title: "Profile Updated",
+            description: "Your profile information has been successfully saved.",
+        });
+    };
+
+    const handleChangeAvatar = () => {
+        toast({
+            title: "Feature not available",
+            description: "Avatar changing is not yet implemented.",
+            variant: "destructive"
+        });
+    };
+
+
     return (
         <Card>
             <CardHeader>
@@ -20,7 +40,7 @@ export default function ProfilePage() {
                         <AvatarImage src="https://picsum.photos/seed/user-avatar/100/100" alt="User" />
                         <AvatarFallback>U</AvatarFallback>
                     </Avatar>
-                    <Button variant="outline">Change Avatar</Button>
+                    <Button variant="outline" onClick={handleChangeAvatar}>Change Avatar</Button>
                 </div>
 
                 <div className="space-y-4">
@@ -45,7 +65,7 @@ export default function ProfilePage() {
                     </div>
                 </div>
 
-                <Button>Update Profile</Button>
+                <Button onClick={handleUpdateProfile}>Update Profile</Button>
             </CardContent>
         </Card>
     )

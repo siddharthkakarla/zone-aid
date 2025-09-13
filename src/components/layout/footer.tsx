@@ -1,9 +1,31 @@
+'use client';
 import Link from 'next/link';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { HeartPulse, Twitter, Linkedin, Facebook } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 export default function Footer() {
+  const { toast } = useToast();
+
+  const handleSubscribe = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const email = e.currentTarget.email.value;
+    if (email) {
+       toast({
+        title: "Subscribed!",
+        description: "Thank you for subscribing to our newsletter.",
+      });
+      e.currentTarget.reset();
+    } else {
+       toast({
+        title: "Error",
+        description: "Please enter a valid email address.",
+        variant: 'destructive'
+      });
+    }
+  };
+
   return (
     <footer className="w-full border-t bg-card">
       <div className="container py-12 px-4 md:px-6">
@@ -40,8 +62,8 @@ export default function Footer() {
           <div className="space-y-2">
             <h4 className="font-semibold font-headline">Stay Updated</h4>
             <p className="text-sm text-foreground/80">Subscribe to our newsletter for updates.</p>
-            <form className="flex space-x-2">
-              <Input type="email" placeholder="Enter your email" className="max-w-lg flex-1" />
+            <form className="flex space-x-2" onSubmit={handleSubscribe}>
+              <Input type="email" id="email" name="email" placeholder="Enter your email" className="max-w-lg flex-1" />
               <Button type="submit">Subscribe</Button>
             </form>
           </div>

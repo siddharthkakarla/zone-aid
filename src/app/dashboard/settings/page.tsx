@@ -1,10 +1,21 @@
+'use client';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { useToast } from "@/hooks/use-toast";
 
 export default function SettingsPage() {
+    const { toast } = useToast();
+
+    const handleSaveChanges = () => {
+        toast({
+            title: "Settings Saved",
+            description: "Your new settings have been successfully applied.",
+        });
+    };
+
     return (
         <Card>
             <CardHeader>
@@ -45,7 +56,7 @@ export default function SettingsPage() {
                         <Switch id="sms-notifications" />
                     </div>
                 </div>
-                <Button>Save Changes</Button>
+                <Button onClick={handleSaveChanges}>Save Changes</Button>
             </CardContent>
         </Card>
     )
