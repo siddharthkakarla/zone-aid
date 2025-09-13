@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HeartPulse, LayoutDashboard, Truck, Map, Settings, Users, CreditCard, LogOut } from 'lucide-react';
+import { HeartPulse, LayoutDashboard, Truck, Map, Settings, Users, CreditCard, LogOut, User } from 'lucide-react';
 import {
   SidebarProvider,
   Sidebar,
@@ -42,7 +42,7 @@ export default function DashboardLayout({
 
   return (
     <SidebarProvider>
-      <Sidebar>
+      <Sidebar collapsible="icon">
         <SidebarHeader>
           <div className="flex items-center gap-2">
             <HeartPulse className="h-8 w-8 text-sidebar-foreground" />
@@ -64,6 +64,14 @@ export default function DashboardLayout({
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
+           <SidebarMenuItem>
+            <SidebarMenuButton asChild tooltip="Profile" isActive={pathname === '/dashboard/profile'}>
+              <Link href="/dashboard/profile">
+                <User />
+                <span>Profile</span>
+              </Link>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
           <SidebarMenuItem>
             <SidebarMenuButton asChild tooltip="Settings" isActive={pathname === '/dashboard/settings'}>
               <Link href="/dashboard/settings">
@@ -84,7 +92,7 @@ export default function DashboardLayout({
       </Sidebar>
       <SidebarInset>
         <header className="sticky top-0 z-30 flex h-14 items-center gap-4 border-b bg-background px-4 sm:static sm:h-auto sm:border-0 sm:bg-transparent sm:px-6">
-          <SidebarTrigger className="sm:hidden" />
+          <SidebarTrigger />
           <div className="relative ml-auto flex-1 md:grow-0" />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -102,6 +110,9 @@ export default function DashboardLayout({
             <DropdownMenuContent align="end">
               <DropdownMenuLabel>My Account</DropdownMenuLabel>
               <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                 <Link href="/dashboard/profile">Profile</Link>
+              </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/dashboard/settings">Settings</Link>
               </DropdownMenuItem>
