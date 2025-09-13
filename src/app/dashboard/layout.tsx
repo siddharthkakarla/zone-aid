@@ -51,9 +51,6 @@ export default function DashboardLayout({
     { href: '/dashboard/vitals', label: 'Health Vitals', icon: Heart },
     { href: '/dashboard/symptom-checker', label: 'Symptom Checker', icon: Stethoscope },
     { href: '/dashboard/appointments', label: 'Appointments', icon: FileText, badge: '3' },
-    { href: '/dashboard/messages', label: 'Messages', icon: MessageSquare, badge: '1' },
-    { href: '/dashboard/prescriptions', label: 'Prescriptions', icon: FileText },
-    { href: '/dashboard/privacy', label: 'Privacy & Security', icon: Shield },
   ];
 
   return (
