@@ -45,8 +45,8 @@ export default function DashboardLayout({
       <Sidebar>
         <SidebarHeader>
           <div className="flex items-center gap-2">
-            <HeartPulse className="h-8 w-8 text-primary" />
-            <span className="font-headline text-xl font-semibold">ZoneAid</span>
+            <HeartPulse className="h-8 w-8 text-sidebar-foreground" />
+            <span className="font-headline text-xl font-semibold text-sidebar-foreground">ZoneAid</span>
           </div>
         </SidebarHeader>
         <SidebarContent>

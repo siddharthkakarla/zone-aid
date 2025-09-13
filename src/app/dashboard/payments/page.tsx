@@ -1,3 +1,5 @@
+'use client';
+
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Download } from "lucide-react";
@@ -27,6 +29,30 @@ export default function PaymentsPage() {
             default: return 'outline';
         }
     }
+
+    const handleDownload = (invoiceId: string) => {
+        // Simulate generating and downloading a PDF receipt
+        const receiptContent = `
+            Receipt for Invoice: ${invoiceId}
+            -----------------------------------
+            Case ID: ${payments.find(p => p.id === invoiceId)?.caseId}
+            Amount: ${payments.find(p => p.id === invoiceId)?.amount}
+            Date: ${payments.find(p => p.id === invoiceId)?.date}
+            Status: ${payments.find(p => p.id === invoiceId)?.status}
+
+            Thank you for your payment.
+        `;
+        const blob = new Blob([receiptContent], { type: 'text/plain' });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = `receipt-${invoiceId}.txt`;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        URL.revokeObjectURL(url);
+    };
+
 
     return (
         <Card>
@@ -61,7 +87,7 @@ export default function PaymentsPage() {
                                     <Badge variant={statusVariant(payment.status)}>{payment.status}</Badge>
                                 </TableCell>
                                 <TableCell className="text-right">
-                                    <Button variant="ghost" size="icon">
+                                    <Button variant="ghost" size="icon" onClick={() => handleDownload(payment.id)}>
                                         <Download className="h-4 w-4" />
                                         <span className="sr-only">Download Receipt</span>
                                     </Button>
