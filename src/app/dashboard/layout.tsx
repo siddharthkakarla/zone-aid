@@ -53,27 +53,23 @@ export default function DashboardLayout({
           <SidebarMenu>
             {navItems.map((item) => (
               <SidebarMenuItem key={item.label}>
-                <Link href={item.href} legacyBehavior passHref>
-                  <SidebarMenuButton asChild isActive={pathname.startsWith(item.href) && (item.href !== '/dashboard' || pathname === '/dashboard')} tooltip={item.label}>
-                    <a>
-                      <item.icon />
-                      <span>{item.label}</span>
-                    </a>
-                  </SidebarMenuButton>
-                </Link>
+                <SidebarMenuButton asChild isActive={pathname.startsWith(item.href) && (item.href !== '/dashboard' || pathname === '/dashboard')} tooltip={item.label}>
+                  <Link href={item.href}>
+                    <item.icon />
+                    <span>{item.label}</span>
+                  </Link>
+                </SidebarMenuButton>
               </SidebarMenuItem>
             ))}
           </SidebarMenu>
         </SidebarContent>
         <SidebarFooter>
-          <Link href="/dashboard/settings" legacyBehavior passHref>
-            <SidebarMenuButton asChild tooltip="Settings" isActive={pathname === '/dashboard/settings'}>
-              <a>
-                <Settings />
-                <span>Settings</span>
-              </a>
-            </SidebarMenuButton>
-          </Link>
+          <SidebarMenuButton asChild tooltip="Settings" isActive={pathname === '/dashboard/settings'}>
+            <Link href="/dashboard/settings">
+              <Settings />
+              <span>Settings</span>
+            </Link>
+          </SidebarMenuButton>
         </SidebarFooter>
       </Sidebar>
       <SidebarInset>
