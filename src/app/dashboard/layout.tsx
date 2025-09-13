@@ -13,7 +13,8 @@ import {
   Shield,
   Settings, 
   LogOut, 
-  User 
+  User,
+  Search
 } from 'lucide-react';
 import {
   SidebarProvider,
@@ -50,7 +51,9 @@ export default function DashboardLayout({
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
     { href: '/dashboard/vitals', label: 'Health Vitals', icon: Heart },
     { href: '/dashboard/symptom-checker', label: 'Symptom Checker', icon: Stethoscope },
+    { href: '/dashboard/doctors', label: 'Find a Doctor', icon: Search },
     { href: '/dashboard/appointments', label: 'Appointments', icon: FileText, badge: '3' },
+    { href: '/dashboard/prescriptions', label: 'Prescriptions', icon: FileText },
   ];
 
   return (
