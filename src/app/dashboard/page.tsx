@@ -35,12 +35,6 @@ export default function Dashboard() {
     return acc;
   }, [] as { status: string; count: number }[]);
 
-  const ambulanceChartColors = {
-    'En-route': 'hsl(var(--chart-2))',
-    'Idle': 'hsl(var(--chart-4))',
-    'Servicing': 'hsl(var(--chart-5))',
-  };
-
   const patientChartConfig = {
     count: {
       label: 'Patients',
@@ -144,13 +138,13 @@ export default function Dashboard() {
                                     tickFormatter={(value) => value.slice(0, 3)}
                                 />
                                 <YAxis />
-                                <Tooltip
+                                <ChartTooltip
                                     cursor={false}
                                     content={<ChartTooltipContent indicator="dot" />}
                                 />
                                 <Bar dataKey="count" radius={4}>
-                                    {patientData.map((entry) => (
-                                        <Cell key={`cell-${entry.status}`} fill={patientChartConfig[entry.status as keyof typeof patientChartConfig]?.color} />
+                                    {patientData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={patientChartConfig[entry.status as keyof typeof patientChartConfig]?.color} />
                                     ))}
                                 </Bar>
                             </BarChart>
@@ -167,10 +161,10 @@ export default function Dashboard() {
                      <ChartContainer config={ambulanceChartConfig} className="h-[250px] w-full">
                         <ResponsiveContainer width="100%" height="100%">
                             <PieChart>
-                                <Tooltip content={<ChartTooltipContent nameKey="status" hideLabel />} />
+                                <ChartTooltip content={<ChartTooltipContent nameKey="status" hideLabel />} />
                                 <Pie data={ambulanceStatusData} dataKey="count" nameKey="status" innerRadius={50} outerRadius={80} strokeWidth={5}>
-                                    {ambulanceStatusData.map((entry) => (
-                                        <Cell key={entry.status} fill={ambulanceChartConfig[entry.status as keyof typeof ambulanceChartConfig].color} />
+                                    {ambulanceStatusData.map((entry, index) => (
+                                        <Cell key={`cell-${index}`} fill={ambulanceChartConfig[entry.status as keyof typeof ambulanceChartConfig]?.color} />
                                     ))}
                                 </Pie>
                             </PieChart>
