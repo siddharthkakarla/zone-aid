@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { HeartPulse, LayoutDashboard, Truck, Map, Settings, Users } from 'lucide-react';
+import { HeartPulse, LayoutDashboard, Truck, Map, Settings, Users, CreditCard } from 'lucide-react';
 import {
   SidebarProvider,
   Sidebar,
@@ -37,6 +37,7 @@ export default function DashboardLayout({
     { href: '/dashboard/patients', label: 'Patient Tracking', icon: Users },
     { href: '/dashboard/optimize', label: 'Blood Delivery', icon: Truck },
     { href: '/dashboard/map', label: 'Ambulance Tracking', icon: Map },
+    { href: '/dashboard/payments', label: 'Payments & Receipts', icon: CreditCard },
   ];
 
   return (
