@@ -1,3 +1,52 @@
 {
-  "placeholderImages": []
+  "placeholderImages": [
+    {
+      "id": "hero-image",
+      "description": "A drone flying over a city, carrying a medical package.",
+      "imageUrl": "https://picsum.photos/seed/zoneaid-hero/1200/800",
+      "imageHint": "drone delivery"
+    },
+    {
+      "id": "founder-rishitha",
+      "description": "Portrait of Rishitha Karipe, co-founder of ZoneAid.",
+      "imageUrl": "https://picsum.photos/seed/rishitha/400/400",
+      "imageHint": "woman portrait"
+    },
+    {
+      "id": "founder-amarnadh",
+      "description": "Portrait of Amarnadh Reddy, co-founder of ZoneAid.",
+      "imageUrl": "https://picsum.photos/seed/amarnadh/400/400",
+      "imageHint": "man portrait"
+    },
+    {
+      "id": "partner-hospital",
+      "description": "Logo of a partner hospital.",
+      "imageUrl": "https://picsum.photos/seed/hospital-logo/200/100",
+      "imageHint": "hospital logo"
+    },
+    {
+      "id": "partner-ngo",
+      "description": "Logo of a partner NGO.",
+      "imageUrl": "https://picsum.photos/seed/ngo-logo/200/100",
+      "imageHint": "charity logo"
+    },
+    {
+      "id": "partner-ambulance",
+      "description": "Logo of a partner ambulance service.",
+      "imageUrl": "https://picsum.photos/seed/ambulance-logo/200/100",
+      "imageHint": "ambulance service"
+    },
+    {
+      "id": "problem-image",
+      "description": "An image depicting a traffic jam, symbolizing delays in emergency response.",
+      "imageUrl": "https://picsum.photos/seed/traffic-jam/600/400",
+      "imageHint": "traffic jam"
+    },
+    {
+      "id": "solution-image",
+      "description": "An image showing a medical professional receiving a package from a ZoneAid drone.",
+      "imageUrl": "https://picsum.photos/seed/medical-delivery/600/400",
+      "imageHint": "medical delivery"
+    }
+  ]
 }
