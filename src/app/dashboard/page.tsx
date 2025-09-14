@@ -2,7 +2,7 @@
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Truck, Droplets, Clock, ArrowRight, Ambulance, Activity, CheckCircle, AlertTriangle } from "lucide-react";
+import { Truck, Droplets, Clock, ArrowRight, Ambulance, Activity, CheckCircle, AlertTriangle, Pill } from "lucide-react";
 import Link from "next/link";
 import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
@@ -10,9 +10,9 @@ import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/
 export default function Dashboard() {
 
   const quickAccessLinks = [
-    { title: "Request Blood", description: "Order emergency blood supplies", icon: Droplets, href: "#" },
-    { title: "Request Medicine", description: "Order critical medicines", icon: Droplets, href: "#" },
-    { title: "Track Ambulance", description: "Live tracking of ambulances", icon: Ambulance, href: "/dashboard/map" },
+    { title: "Request Blood", description: "Order emergency blood supplies", icon: Droplets, href: "/dashboard/blood-delivery" },
+    { title: "Request Medicine", description: "Order critical medicines", icon: Pill, href: "/dashboard/medicine-delivery" },
+    { title: "Track Ambulance", description: "Live tracking of ambulances", icon: Ambulance, href: "/dashboard/ambulance-live-tracking" },
     { title: "Optimize Path", description: "AI-powered route optimization", icon: Activity, href: "/dashboard/optimize" },
   ];
 
