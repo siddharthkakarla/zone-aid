@@ -11,7 +11,9 @@ import {
   FlaskConical,
   LogOut, 
   User,
-  Settings 
+  Settings,
+  Droplets,
+  Pill
 } from 'lucide-react';
 import {
   SidebarProvider,
@@ -46,8 +48,10 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const navItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { href: '/dashboard/optimize', label: 'Optimize', icon: FlaskConical },
-    { href: '/dashboard/map', label: 'Live Map', icon: Map, badge: '3' },
+    { href: '/dashboard/blood-delivery', label: 'Blood Delivery', icon: Droplets },
+    { href: '/dashboard/medicine-delivery', label: 'Medicine Delivery', icon: Pill },
+    { href: '/dashboard/ambulance-live-tracking', label: 'Ambulance Live Tracking', icon: Map, badge: '3' },
+    { href: '/dashboard/optimize', label: 'Optimize Path', icon: FlaskConical },
     { href: '/dashboard/payments', label: 'Payments', icon: Truck },
   ];
 
