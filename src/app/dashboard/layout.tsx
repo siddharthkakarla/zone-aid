@@ -6,15 +6,12 @@ import {
   HeartPulse, 
   LayoutDashboard, 
   Siren, 
-  Stethoscope, 
-  FileText,
-  Heart,
-  MessageSquare,
-  Shield,
-  Settings, 
+  Truck, 
+  Map,
+  FlaskConical,
   LogOut, 
   User,
-  Search
+  Settings 
 } from 'lucide-react';
 import {
   SidebarProvider,
@@ -49,11 +46,9 @@ export default function DashboardLayout({
   const pathname = usePathname();
   const navItems = [
     { href: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-    { href: '/dashboard/vitals', label: 'Health Vitals', icon: Heart },
-    { href: '/dashboard/symptom-checker', label: 'Symptom Checker', icon: Stethoscope },
-    { href: '/dashboard/doctors', label: 'Find a Doctor', icon: Search },
-    { href: '/dashboard/appointments', label: 'Appointments', icon: FileText, badge: '3' },
-    { href: '/dashboard/prescriptions', label: 'Prescriptions', icon: FileText },
+    { href: '/dashboard/optimize', label: 'Optimize', icon: FlaskConical },
+    { href: '/dashboard/map', label: 'Live Map', icon: Map, badge: '3' },
+    { href: '/dashboard/payments', label: 'Payments', icon: Truck },
   ];
 
   return (
@@ -62,7 +57,7 @@ export default function DashboardLayout({
         <SidebarHeader>
           <div className="flex items-center gap-2">
             <HeartPulse className="h-8 w-8 text-primary" />
-            <span className="font-headline text-xl font-semibold text-foreground">HealthPlus</span>
+            <span className="font-headline text-xl font-semibold text-foreground">ZoneAid</span>
           </div>
         </SidebarHeader>
         <SidebarContent>
@@ -139,7 +134,7 @@ export default function DashboardLayout({
                 >
                   <Avatar>
                     <AvatarImage src="https://picsum.photos/seed/user-avatar/100/100" alt="User" />
-                    <AvatarFallback>U</AvatarFallback>
+                    <AvatarFallback>JD</AvatarFallback>
                   </Avatar>
                 </Button>
               </DropdownMenuTrigger>

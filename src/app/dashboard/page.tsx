@@ -2,76 +2,85 @@
 
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Stethoscope, FileText, MessageSquare, ArrowRight, Activity, Droplets, Wind, Weight, Bell, ShieldCheck } from "lucide-react";
+import { Truck, Droplets, Clock, ArrowRight, Ambulance, Activity, CheckCircle, AlertTriangle } from "lucide-react";
 import Link from "next/link";
-import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, LineChart, Line } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from "@/components/ui/chart";
 
 export default function Dashboard() {
 
   const quickAccessLinks = [
-    { title: "Book an Appointment", description: "Find a doctor and schedule a visit", icon: Stethoscope, href: "/dashboard/appointments" },
-    { title: "View Prescriptions", description: "Access your recent prescriptions", icon: FileText, href: "/dashboard/prescriptions" },
-    { title: "Check Symptoms", description: "Use the AI checker for insights", icon: Activity, href: "/dashboard/symptom-checker" },
-    { title: "Contact Support", description: "Get help with your account", icon: MessageSquare, href: "#" },
+    { title: "Request Blood", description: "Order emergency blood supplies", icon: Droplets, href: "#" },
+    { title: "Request Medicine", description: "Order critical medicines", icon: Droplets, href: "#" },
+    { title: "Track Ambulance", description: "Live tracking of ambulances", icon: Ambulance, href: "/dashboard/map" },
+    { title: "Optimize Path", description: "AI-powered route optimization", icon: Activity, href: "/dashboard/optimize" },
   ];
 
-  const vitalData = [
-    { date: "Mon", bp: 120, sugar: 90 },
-    { date: "Tue", bp: 122, sugar: 95 },
-    { date: "Wed", bp: 118, sugar: 88 },
-    { date: "Thu", bp: 125, sugar: 105 },
-    { date: "Fri", bp: 121, sugar: 92 },
-    { date: "Sat", bp: 119, sugar: 94 },
-    { date: "Sun", bp: 120, sugar: 91 },
+  const deliveryData = [
+    { type: "Blood", delivered: 120, failed: 5, avgTime: 12.5 },
+    { type: "Medicine", delivered: 80, failed: 2, avgTime: 25.2 },
+    { type: "Equipment", delivered: 45, failed: 1, avgTime: 45.0 },
+    { type: "Organs", delivered: 5, failed: 0, avgTime: 60.0 },
   ];
 
-  const chartConfig = {
-    bp: { label: "Blood Pressure", color: "hsl(var(--chart-1))" },
-    sugar: { label: "Blood Sugar", color: "hsl(var(--chart-2))" },
+  const ambulanceStatusData = [
+    { name: 'Available', value: 15, fill: 'var(--color-available)' },
+    { name: 'On-call', value: 8, fill: 'var(--color-oncall)' },
+    { name: 'Servicing', value: 2, fill: 'var(--color-servicing)' },
+  ];
+
+  const deliveryChartConfig = {
+    delivered: { label: "Delivered", color: "hsl(var(--chart-1))" },
   }
+  
+  const ambulanceChartConfig = {
+      value: { label: "Ambulances" },
+      available: { label: "Available", color: "hsl(var(--chart-2))" },
+      oncall: { label: "On Call", color: "hsl(var(--chart-1))" },
+      servicing: { label: "Servicing", color: "hsl(var(--chart-3))" },
+  };
 
   return (
     <div className="grid gap-6">
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Blood Pressure</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Total Deliveries</CardTitle>
+            <Truck className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">120/80 <span className="text-sm font-normal text-muted-foreground">mmHg</span></div>
-            <p className="text-xs text-muted-foreground">Last updated: 1h ago</p>
+            <div className="text-2xl font-bold">250</div>
+            <p className="text-xs text-muted-foreground">+20.1% from last month</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Blood Sugar</CardTitle>
-            <Droplets className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Avg. Blood Delivery</CardTitle>
+            <Clock className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">94 <span className="text-sm font-normal text-muted-foreground">mg/dL</span></div>
-            <p className="text-xs text-muted-foreground">Fasting, 2h ago</p>
+            <div className="text-2xl font-bold">12m 30s</div>
+            <p className="text-xs text-muted-foreground">Within 15 min target</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Heart Rate</CardTitle>
-            <Activity className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Success Rate</CardTitle>
+            <CheckCircle className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">72 <span className="text-sm font-normal text-muted-foreground">bpm</span></div>
-            <p className="text-xs text-muted-foreground">Normal</p>
+            <div className="text-2xl font-bold">99.2%</div>
+            <p className="text-xs text-muted-foreground">All deliveries</p>
           </CardContent>
         </Card>
         <Card>
           <CardHeader className="flex flex-row items-center justify-between pb-2">
-            <CardTitle className="text-sm font-medium">Weight</CardTitle>
-            <Weight className="h-4 w-4 text-muted-foreground" />
+            <CardTitle className="text-sm font-medium">Critical Alerts</CardTitle>
+            <AlertTriangle className="h-4 w-4 text-destructive" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">75 <span className="text-sm font-normal text-muted-foreground">kg</span></div>
-            <p className="text-xs text-muted-foreground">+0.5 kg from last week</p>
+            <div className="text-2xl font-bold text-destructive">2</div>
+            <p className="text-xs text-muted-foreground">High-traffic zones</p>
           </CardContent>
         </Card>
       </div>
@@ -79,107 +88,90 @@ export default function Dashboard() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle>Weekly Health Summary</CardTitle>
-            <CardDescription>A summary of your key health vitals over the last week.</CardDescription>
+            <CardTitle>Deliveries Overview</CardTitle>
+            <CardDescription>A summary of deliveries by type for this month.</CardDescription>
           </CardHeader>
           <CardContent>
-            <ChartContainer config={chartConfig} className="h-[250px] w-full">
-              <LineChart data={vitalData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
-                <XAxis dataKey="date" tickLine={false} axisLine={false} tickMargin={8} />
+            <ChartContainer config={deliveryChartConfig} className="h-[250px] w-full">
+              <BarChart data={deliveryData} margin={{ top: 5, right: 20, left: -10, bottom: 5 }}>
+                <XAxis dataKey="type" tickLine={false} axisLine={false} tickMargin={8} />
+                <YAxis />
                 <ChartTooltip
                   cursor={false}
                   content={<ChartTooltipContent indicator="dot" />}
                 />
-                <Line
-                  dataKey="bp"
-                  type="monotone"
-                  stroke="var(--color-bp)"
-                  strokeWidth={2}
-                  dot={true}
-                />
-                <Line
-                  dataKey="sugar"
-                  type="monotone"
-                  stroke="var(--color-sugar)"
-                  strokeWidth={2}
-                  dot={true}
-                />
-              </LineChart>
+                <Bar dataKey="delivered" fill="var(--color-delivered)" radius={4} />
+              </BarChart>
             </ChartContainer>
           </CardContent>
         </Card>
 
-        <div className="space-y-6">
-          <Card>
+        <Card>
             <CardHeader>
-              <CardTitle>Quick Access</CardTitle>
+                <CardTitle>Ambulance Status</CardTitle>
+                 <CardDescription>Live status of the ambulance fleet.</CardDescription>
             </CardHeader>
-            <CardContent className="grid gap-4">
-              {quickAccessLinks.map((link) => (
-                <Link
-                  key={link.title}
-                  href={link.href}
-                  className="flex items-center justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="p-2 bg-background rounded-md">
-                      <link.icon className="h-5 w-5 text-primary" />
-                    </div>
-                    <div>
-                      <p className="font-semibold">{link.title}</p>
-                    </div>
-                  </div>
-                  <ArrowRight className="h-5 w-5 text-muted-foreground" />
-                </Link>
-              ))}
+            <CardContent>
+                <ChartContainer config={ambulanceChartConfig} className="h-[250px] w-full">
+                   <PieChart>
+                        <ChartTooltip content={<ChartTooltipContent hideLabel />} />
+                        <Pie data={ambulanceStatusData} dataKey="value" nameKey="name" innerRadius={50} outerRadius={80} strokeWidth={5}>
+                             {ambulanceStatusData.map((entry, index) => (
+                                <Cell key={`cell-${index}`} fill={entry.fill} />
+                            ))}
+                        </Pie>
+                    </PieChart>
+                </ChartContainer>
             </CardContent>
-          </Card>
-        </div>
+        </Card>
       </div>
       
        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Card>
               <CardHeader>
-                  <CardTitle>Upcoming Reminders</CardTitle>
+                  <CardTitle>Quick Access</CardTitle>
                   <CardDescription>
-                      Medication and appointment reminders.
+                      Shortcuts to common actions.
                   </CardDescription>
               </CardHeader>
-              <CardContent className="space-y-4">
-                  <div className="flex items-start gap-4 p-3 rounded-lg bg-muted/50">
-                      <Bell className="h-5 w-5 text-primary mt-1" />
-                      <div>
-                          <p className="font-medium">Appointment with Dr. Smith</p>
-                          <p className="text-sm text-muted-foreground">Tomorrow at 10:30 AM - Cardiology</p>
-                      </div>
-                  </div>
-                  <div className="flex items-start gap-4 p-3 rounded-lg bg-muted/50">
-                      <Bell className="h-5 w-5 text-primary mt-1" />
-                      <div>
-                          <p className="font-medium">Take Metformin</p>
-                          <p className="text-sm text-muted-foreground">Today at 9:00 PM</p>
-                      </div>
-                  </div>
-              </CardContent>
+              <CardContent className="grid gap-4">
+                {quickAccessLinks.map((link) => (
+                    <Link
+                    key={link.title}
+                    href={link.href}
+                    className="flex items-center justify-between p-3 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
+                    >
+                    <div className="flex items-center gap-4">
+                        <div className="p-2 bg-background rounded-md">
+                        <link.icon className="h-5 w-5 text-primary" />
+                        </div>
+                        <div>
+                        <p className="font-semibold">{link.title}</p>
+                        </div>
+                    </div>
+                    <ArrowRight className="h-5 w-5 text-muted-foreground" />
+                    </Link>
+                ))}
+            </CardContent>
           </Card>
            <Card>
               <CardHeader>
-                  <CardTitle>Data & Privacy</CardTitle>
+                  <CardTitle>System Status</CardTitle>
                   <CardDescription>
-                      Your information is secure and encrypted.
+                      Current operational status of all systems.
                   </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                  <div className="flex items-center gap-4 p-3 rounded-lg bg-green-100/50 dark:bg-green-900/20">
-                      <ShieldCheck className="h-6 w-6 text-green-600 dark:text-green-400" />
+                      <CheckCircle className="h-6 w-6 text-green-600 dark:text-green-400" />
                       <div>
-                          <p className="font-medium text-green-700 dark:text-green-300">HIPAA & GDPR Compliant</p>
-                          <p className="text-sm text-muted-foreground">We follow strict data privacy regulations.</p>
+                          <p className="font-medium text-green-700 dark:text-green-300">All Systems Operational</p>
+                          <p className="text-sm text-muted-foreground">Logistics, tracking, and communication are online.</p>
                       </div>
                   </div>
-                  <Button asChild variant="outline">
-                      <Link href="/dashboard/privacy">
-                          Manage Privacy Settings
+                   <Button asChild variant="outline">
+                      <Link href="#">
+                          View Status Page
                       </Link>
                   </Button>
               </CardContent>
